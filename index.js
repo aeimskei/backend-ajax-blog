@@ -16,6 +16,7 @@ app.use(bodyParser.json())
 // Blog Posts Routes
 // ===========================================
 app.get('/posts', controller.getAllPosts)
+app.get('/posts/:id', controller.getPostById)
 
 // ===========================================
 // Error handling
