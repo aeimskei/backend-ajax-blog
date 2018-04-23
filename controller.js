@@ -22,7 +22,7 @@ const getPostById = (req, res, next) => {
   const post = model.getPostById(id)
 
   if (post.error) {
-    let {error, message} = book;
+    let {error, message} = post;
     return res.status(error).json({error: {message}})
   }
 
@@ -63,10 +63,30 @@ const updatePost = (req, res, next) => {
   res.status(201).json({data: post})
 }
 
+// ===========================================
+// DELETE, Destroy post
+// ===========================================
+
+const deletePost = (req, res, next) => {
+  const id = req.params.id
+
+  if (!id) return next({status: 400, message: `Post ID is required.`})
+
+  const post = model.deletePost(id)
+
+  if (post.error) {
+    let {error, message} = post;
+    return res.status(error).json({error: {message}})
+  }
+
+  res.status(200).json({data: post})
+}
+
 
 module.exports = {
   getAllPosts,
   getPostById,
   createPost,
-  updatePost
+  updatePost,
+  deletePost
 }

@@ -19,6 +19,7 @@ app.get('/posts', controller.getAllPosts)
 app.get('/posts/:id', controller.getPostById)
 app.post('/posts/', controller.createPost)
 app.put('/posts/:id', controller.updatePost)
+app.delete('/posts/:id', controller.deletePost)
 
 // ===========================================
 // Error handling

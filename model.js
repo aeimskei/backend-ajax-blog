@@ -67,10 +67,31 @@ function updatePost(id, title, content) {
 }
 // TEST: http PUT localhost:3000/posts/7fdf61 title:='Test Change' content='Update Content'
 
+// ===========================================
+// DELETE, Destroy post
+// ===========================================
+
+function deletePost(id) {
+  const post = posts.find(post => post.id === id)
+
+  if (!post) {
+    return {error: 404, message: `Post id of ${id} was not found`}
+  }
+
+  const index = posts.indexOf(post)
+  posts.splice(index, 1)
+  fs.writeFileSync(filePath, JSON.stringify(posts))
+
+  return post;
+}
+// TEST: http DELETE localhost:3000/posts/07ddcf
+
+
 
 module.exports = {
   getAllPosts,
   getPostById,
   createPost,
-  updatePost
+  updatePost,
+  deletePost
 }
