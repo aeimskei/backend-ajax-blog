@@ -4,6 +4,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000
+const controller = require('./controller')
 
 app.disable('x-powered-by') 
 if (process.env.NODE_ENV !== 'test')
@@ -14,9 +15,7 @@ app.use(bodyParser.json())
 // ===========================================
 // Blog Posts Routes
 // ===========================================
-
-
-
+app.get('/posts', controller.getAllPosts)
 
 // ===========================================
 // Error handling

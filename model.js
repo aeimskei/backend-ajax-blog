@@ -1,6 +1,6 @@
 const fs = require('fs')
 const ids = require('short-id')
-const filePath = require('../../db/posts.json')
+const filePath = './posts.json'
 
 const posts = JSON.parse(fs.readFileSync(filePath))
 
