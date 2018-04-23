@@ -26,9 +26,51 @@ function getPostById(id) {
     return post;
   }
 }
+// TEST: http GET localhost:3000/posts/ed8f74
+
+// ===========================================
+// POST, Create new post
+// ===========================================
+
+function createPost(title, content) {
+  const posts = getAllPosts()
+
+  const newPost = {
+    id: ids.generate(),
+    title: title,
+    content: content
+  }
+
+  posts.push(newPost)
+  fs.writeFileSync(filePath, JSON.stringify(posts))
+
+  return newPost;
+}
+// TEST: http POST localhost:3000/posts title='New Post' content='Something new here'
+
+// ===========================================
+// PUT, Update post
+// ===========================================
+
+function updatePost(id, title, content) {
+  const post = getPostById(id)
+
+  if (!post) {
+    return {error: 404, message: `Post with id of ${id} not found.`}
+  }
+
+  post.title = title
+  post.content = content
+  fs.writeFileSync(filePath, JSON.stringify(posts))
+
+  return post;
+}
+// TEST: http PUT localhost:3000/posts/7fdf61 title:='Test Change' content='Update Content'
 
 
 module.exports = {
   getAllPosts,
-  getPostById
+  getPostById,
+  createPost,
+  updatePost
 }
